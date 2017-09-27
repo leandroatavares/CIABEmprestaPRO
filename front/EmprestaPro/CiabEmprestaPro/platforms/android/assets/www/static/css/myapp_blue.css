@@ -1,0 +1,28 @@
+﻿.nav-content {
+    background: #0a4d84; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #0a4d84 0%, #102368 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover, #0a4d84 0%,#102368 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center, #0a4d84 0%,#102368 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a4d84', endColorstr='#102368',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.img-user {
+    color: #427097;
+}
+
+.logo_provider {
+    border-top: 1px solid #44759d;
+}
+
+
+header.bar-nav{
+   background: #04447C;
+}
+
+.close-menu{
+    background:#04447C;
+}
+
+body {
+    margin: 0px;
+}

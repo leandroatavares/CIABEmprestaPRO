@@ -1,0 +1,153 @@
+﻿
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+    div.navBar {
+        background-color: #04447C;
+        height: 50px;
+        text-align: center;
+        font-size: 17px;
+        color: #ffffff;
+        padding-top: 15px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    div.conteudo {
+        margin: 10px 10px 10px 10px;
+        font-size: 16px;
+    }
+
+    div.boxSimulador {
+        background: #ffffff;
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        margin-top: 20px;
+        border: solid #cacaca 2px;
+        border-radius: 10px;
+        padding: 0 !important;
+        overflow: hidden;
+    }
+
+    div.pergunta {
+        background: #04447C;
+        
+        padding: 10px;
+    }
+
+    div.resposta {
+        background-color: #ffffff;
+        padding: 10px;
+        border-top: solid #cacaca 1px;
+    }
+
+    div.btSimular {
+        margin-top: 30px;
+        text-align: center;
+        background: #04447C;
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        padding: 10px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    div.btPular {
+        margin-top: 10px;
+        text-align: center;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+p {
+    margin: 0 !important;
+    color: #111111;
+}
+
+    p.pergunta {
+        margin: 0 !important;
+        color: #ffffff;
+        font-size: 13px;
+    }
+
+    p.resposta {
+        text-align: center;
+    }
+
+    p.btSimular {
+        color: #ffffff;
+    }
+
+    p.btPular {
+        color: #04447C;
+    }
+    p.wc {
+        color: #04447C;
+        font-size:20px;
+        text-align:center;
+        text-shadow: 1px 1px 2px #777;
+    }
+
+input.resposta {
+    border: solid #cacaca 1px;
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+}
+hr {
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 8px auto;
+    height: 0;
+    width: 100%;
+    max-height: 0;
+    font-size: 1px;
+    line-height: 0;
+    clear: both;
+    border: none;
+    border-top: 1px solid #aaaaaa;
+    border-bottom: 1px solid #ffffff;
+}
+
+

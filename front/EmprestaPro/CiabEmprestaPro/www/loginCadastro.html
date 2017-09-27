@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Provider IT</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="static/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="static/css/myapp.css" rel="stylesheet" />
+    <script src="static/js/jquery-3.2.1.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="cordova.js"></script>
+    <script src="static/js/myapp.js"></script>
+    <script src="static/js/ajax-loading.js"></script>
+</head>
+<body>
+    <div class="content-login">
+        <video autoplay muted loop webkit-playsinline playsinline preload="auto" class="bg-vid">
+            <source src="static/img/19400221.mp4" type="video/webm">
+            <source src="static/img/19400221.mp4" type="video/mp4">
+        </video>
+        <div class="logo">
+            <img src="static/img/logo-provider-alt.png" />
+        </div>
+        <div class="safe_area">
+            <div class="row">
+                <div class="col-xs-12">
+                    <input class="input-login" name="nome" placeholder="Nome" id="nome_completo" required />
+                    <input class="input-login" name="email" placeholder="E-mail" id="email" required />
+                    <input class="input-login" name="password" type="password" placeholder="Senha" id="password" required />
+                </div>
+                <div class="col-xs-12 text-center" style="margin-top:30px">
+                    <button class="btn-login btn-entrar" id="btnCadastrar">Cadastrar</button>
+                    <a href="login.html" class="btn-login-link">Já tenho cadastro</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       // $('select').material_select();
+        $(document).ready(function () {
+            var loading = $.loading();
+        });
+
+        $('#btnCadastrar').click(function () {
+            if ($("#nome_completo").val() == "" ||
+                $("#email").val() == "" ||
+                $("#password").val() == "") {
+
+                navigator.notification.alert(
+                    'Preencha todos os campos.',  // message
+                    function () { },
+                    'Atenção',            // title
+                    'OK'                  // buttonName
+                );
+            } else {
+                var x = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if (!x.test($("#email").val())) {
+                    navigator.notification.alert(
+                        'Digite um e-mail válido.',  // message
+                        function () { },
+                        'Atenção',            // title
+                        'OK'                  // buttonName
+                    );
+                } else {
+                    cadastrarUser();
+                    navigator.notification.alert(
+                        'Usuário cadastrado.',  // message
+                        function () { location.href = "login.html"; },
+                        'Atenção',            // title
+                        'OK'                  // buttonName
+                    );
+                }
+
+            }
+        });
+        $('#btnVoltar').click(function () { location.href = 'login.html' });
+
+        function cadastrarUser() {
+            var obj = {
+                fullname: $("#nome_completo").val(),
+                email: $("#email").val(),
+                password: $("#password").val(),
+                cpf: null,
+                typedoc: null,
+                numdoc: null,
+                nomemae: null,
+                nomepai: null,
+                nacionalidade: null,
+                uf: null,
+                cidade: null,
+                estadocivil: null,
+                nomeconjuge: null,
+                escolaridade: null,
+                sexo: null,
+                telresidencial: null,
+                telcelular: null
+            }
+            $.post("https://provider-ciab.mybluemix.net/createuser", obj).done(function (data) {
+
+                if (data != null) {
+                    window.localStorage.setItem("user", JSON.stringify(data));
+                }
+                else {
+                    navigator.notification.alert(
+                        'Usuário ou senha inválidos.',  // message
+                        function () { },         // callback
+                        'Atenção',            // title
+                        'Tentar novamente'                  // buttonName
+                    );
+                }
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Provider IT</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="static/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="static/css/myapp.css" rel="stylesheet" />
+    <script src="static/js/jquery-3.2.1.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="cordova.js"></script>
+    <script src="static/js/myapp.js"></script>
+    <script src="static/js/ajax-loading.js"></script>
+</head>
+<body>
+    <div class="content-login">
+        <video autoplay muted loop webkit-playsinline playsinline preload="auto" class="bg-vid">
+            <source src="static/img/19400221.mp4" type="video/webm">
+            <source src="static/img/19400221.mp4" type="video/mp4">
+        </video>
+        <div class="logo">
+            <img src="static/img/logo-provider-alt.png" />
+        </div>
+        <div class="safe_area">
+            <div class="row">
+                <div class="col-xs-12">
+                    <input class="input-login" name="email" placeholder="E-mail" />
+                    <input class="input-login" name="password" type="password" placeholder="Senha" />
+                </div>
+                <div class="col-xs-12 text-center" style="margin-top:30px">
+                    <button class="btn-login btn-entrar">Entrar</button>
+                    <a href="loginCadastro.html" class="btn-login-link">Não tenho cadastro</a>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+<script>
+    $(document).ready(function () {
+        var loading = $.loading();
+    });
+    var user = window.localStorage.getItem("user");
+    user = JSON.parse(user);
+    if (user != null && user.hasOwnProperty("_id")) {
+        location.href = "home.html";
+    }
+
+
+    $(".btn-entrar").on("click", function (e) {
+        e.preventDefault();
+        if ($("input[name=email]").val() == "" || $("input[name=password]").val() == "") {
+            navigator.notification.alert(
+                'Digite seu email e senha para entrar',  // message
+                function () { },
+                'Atenção',            // title
+                'OK'                  // buttonName
+            );
+        } else {
+            if ($("input[name=email]").val() != "") {
+                var x = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if (!x.test($("input[name=email]").val())) {
+                    navigator.notification.alert(
+                        'Digite um e-mail válido.',  // message
+                        function () { },
+                        'Atenção',            // title
+                        'OK'                  // buttonName
+                    );
+                    return false;
+                }
+            }
+
+            var obj = {
+                email: $("input[name=email]").val(),
+                password: $("input[name=password]").val()
+            }
+            
+            $.post("https://provider-ciab.mybluemix.net/user", obj).done(function (data) {
+
+                if (data != null) {
+                    window.localStorage.setItem("user",JSON.stringify(data));
+                    setTimeout(
+                        function () {
+                            location.href = "home.html";
+                        }, 900);  
+                }
+                else {
+                    navigator.notification.alert(
+                        'Usuário ou senha inválidos.',  // message
+                        function () { },         // callback
+                        'Atenção',            // title
+                        'Tentar novamente'                  // buttonName
+                    );
+                }
+            });
+        }
+    });
+
+    //$('#teste').click(function () {
+    //    var pass = "";
+    //    var chars = 16;
+    //    //function Password() {
+    //        generate = function (chars) {
+    //            for (var i = 0; i < chars; i++) {
+    //                pass += this.getRandomChar();
+    //            }
+                
+    //        }
+    //        getRandomChar = function () {
+    //            var ascii = [[48, 57], [64, 90], [97, 122]];
+    //            var i = Math.floor(Math.random() * ascii.length);
+    //            return String.fromCharCode(Math.floor(Math.random() * (ascii[i][1] - ascii[i][0])) + ascii[i][0]);
+    //        }
+    //        generate(chars);
+    //   }
+    //    console.dir(pass);
+    //});
+
+
+</script>
+
+</html>

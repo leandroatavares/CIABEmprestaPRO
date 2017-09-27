@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Provider IT</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="static/css/Simulador.css" rel="stylesheet" />
+    <script src="static/js/jquery-3.2.1.min.js"></script>
+    <link href="static/css/myapp.css" rel="stylesheet" />
+    <link href="static/css/myapp_blue.css" rel="stylesheet" />
+    <script src="static/js/funcoesSimulador.js"></script>
+    <script src="static/js/myapp.js"></script>
+    <link href="static/css/ratchet.css" rel="stylesheet" />
+    <link href="static/css/rangeslider.css" rel="stylesheet" />
+    <script src="static/js/rangeslider.min.js"></script>
+    <script src="static/js/jquery.mask.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <link href="static/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="static/js/cadastro-controller.js"></script>
+    <link href="static/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="cordova.js"></script>
+</head>
+<body style="margin:0px; background-color:#eeeeee">
+    <style>
+        .cadastro-numbers {
+            height: 53px;
+            width: 53px;
+            background: #EAE9E8;
+            font-size: 30px;
+            font-family: Raleway;
+            color: #616161;
+            text-align: center;
+            padding: 5px 0 0 0;
+            border-radius: 0px;
+            margin: 0px 0px 0px 0px;
+        }
+        .pre-cadastro-textdiv {
+            width: calc(100%-60px);
+        }
+        .pre-cadastro-listitem {
+            height: 55px;
+            background: transparent;
+            width: 100%;
+            border-bottom: 2px solid #dee0e1;
+            position: relative;
+            z-index: 1;
+        }
+        .cadastro-seta {
+            position: absolute;
+            right: 15px;
+            top: 17px;
+            color: #bababa;
+        }
+        #btnFinaliza {
+            font-size: 22px;
+            margin:5px 2px;
+            width: 100%;
+         
+        }
+        .modal-content {
+
+            width: 100%;
+            height: 100% 
+        }
+        .modal-dialog {
+            min-height: calc(100vh - 60px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: auto;
+        }
+ </style>
+    <header class="bar bar-nav">
+        <div class="btnVoltar"><a class="icon icon-left-nav pull-left" onclick="Voltart()"></a></div>
+        <h1 class="title">Cadastro</h1>
+    </header>
+
+    <div class="content" style="background:#cfcfcf">
+        <div class="container" style="background:white;margin:10px 10px;border-radius:3px;padding:20px;text-align:center;color:#616161;font-size:16px">
+            <b>Envie os documentos solicitados abaixo:</b>
+        </div>
+        <div class="container" style="background:white;margin:10px 10px;border-radius:3px;padding:5px;">
+            <div class="pre-cadastro-listitem" data-concluido="false" data-id="RG" >
+                <div class="cadastro-numbers">
+                    1
+                </div>
+                <div class="pre-cadastro-textdiv">
+                    <p style="font-size:17px;position:absolute;left:70px;top:13px;color:#616161;font-weight:bold;">RG</p>
+                    <!--<div id="DADOS_PESSOAIS"><i id="DADOS_PESSOAIS_i"></i></div>-->
+                    <img src="static/img/right-chevron.png" class="cadastro-seta" />
+                    <!--<i class="fa fa-chevron-right cadastro-seta"></i>-->
+                </div>
+            </div>
+            <div class="pre-cadastro-listitem" data-concluido="false" data-id="CPF" >
+                <div class="cadastro-numbers">
+                    2
+                </div>
+                 <div class="pre-cadastro-textdiv">
+                    <p style="font-size:17px;position:absolute;left:70px;top:17px;color:#616161;font-weight:bold;line-height:17px;">CPF</p>
+                    <img src="static/img/right-chevron.png" class="cadastro-seta" />
+                </div>
+            </div>
+            <div class="pre1-cadastro-listitem" data-id="Concluido">
+                    <button type="button" class="btn btn-success" id="btnFinaliza" style="display:none;">Finalizar</button>
+                </div>
+            </div>  
+                </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Tire uma foto do <span id="tituloDoc"></span></h4>
+                </div>
+                <div class="modal-body text-center">
+                    <input type="hidden" id="tipoDoc">
+                    <img src="" id="imgCamera" style="display:none; width:100%;"/>
+
+                    <div class="camera">
+                        <button type="button" class="btn btn-primary" onclick="AbreFotos()"><span class="fa fa-camera"></span></button>
+                    </div>
+                    <div class="concluir" style="display:none;">
+                        
+                        <button type="button" class="btn btn-success" onclick="Ok()">Concluir</button>
+                        <button type="button" class="btn btn-negative" onclick="AbreFotos()">Repetir</button>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        function Voltart() {
+            location.href ='cadastro.html'
+        };
+
+        $(".pre-cadastro-listitem").click(function () {
+            var id = $(this).data("id"); // vai receber rg ou cpf
+            if ($(this).data("concluido") == false) {
+            
+            $("#tipoDoc").val(id);
+            $("#tituloDoc").html(id);
+            $('.modal-header').find('h4').html('<h4 class="modal-title text-center">Tire uma foto.</span></h4>');
+            $("#myModal").modal("show");
+            $(".camera").show();
+            $(".camera").find
+            $(".concluir").hide();
+            
+            }
+        });
+
+        function AbreFotos() {
+            var srcType = Camera.PictureSourceType.CAMERA;
+            var options = setOptions(srcType);
+
+             navigator.camera.getPicture(function cameraSuccess(imageUri) {
+                 $("#imgCamera").attr("src", imageUri).show();
+                 $(".camera").hide();
+                 $(".concluir").show();
+                 $('.modal-header').find('h4').html('Usar esta foto?');
+
+            }, function cameraError(error) {
+                console.debug("Unable to obtain picture: " + error, "app");
+                alert("FAIL");
+            }, options);
+        }
+
+        function setOptions(srcType) {
+            var options = {
+                // Some common settings are 20, 50, and 100
+                quality: 50,
+                destinationType: Camera.DestinationType.FILE_URI,
+                // In this app, dynamically set the picture source, Camera or photo gallery
+                sourceType: srcType,
+                encodingType: Camera.EncodingType.JPEG,
+                mediaType: Camera.MediaType.PICTURE,
+                allowEdit: true,
+                correctOrientation: true  //Corrects Android orientation quirks
+            }
+            return options;
+        }
+
+        $('#myModal').on('hidden.bs.modal', function (e) {
+            $("#imgCamera").attr("src", "").hide();    
+        })
+
+        function Ok() {
+
+            var tipodoc = $("#tipoDoc").val();
+
+            $(".pre-cadastro-listitem[data-id=" + tipodoc + "]").data("concluido", "true");
+
+            $(".pre-cadastro-listitem[data-id=" + tipodoc + "]").find(".cadastro-seta").attr("src", "static/img/check.png");
+            $("#myModal").modal("hide");
+
+            var qtd_concluido = 0;
+            $.each($(".pre-cadastro-listitem"), function (index, item) {
+                if ($(item).data("concluido") == "true") {
+                    qtd_concluido++;
+                }
+            });
+            if ($(".pre-cadastro-listitem").length == qtd_concluido) {
+                $("#btnFinaliza").show();
+        
+            }
+        }
+        $("#btnFinaliza").click(function () {
+            localStorage.setItem("temfoto", "true");
+            location.href="cadastro.html"
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Provider IT</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="static/js/jquery-3.2.1.min.js"></script>
+    <script src="static/js/myapp.js"></script>
+    <script src="static/js/jquery.mask.min.js"></script>
+    <script src="static/js/cadastro-controller.js"></script>
+    <script src="static/js/materialize.min.js"></script>
+    <link href="static/css/materialize.css" rel="stylesheet" />
+    <link href="static/css/myapp_blue.css" rel="stylesheet" />
+    <link href="static/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="cordova.js"></script>
+    <script src="static/js/ajax-loading.js"></script>
+</head>
+<body style="margin:0px; background-color:#cfcfcf">
+
+    <style>
+        .container-btn {
+            text-align: center;
+        }
+
+        #btnCadastrar {
+            background-color: #04447C;
+        }
+
+        #btnVoltar {
+            background-color: #04447C;
+        }
+
+        .input-cadastro {
+            font-size: 14px;
+        }
+
+        .input-field {
+            margin-top: 0px;
+        }
+
+            .input-field input[type=text]:focus {
+                border-bottom: 1px solid #04447C;
+                box-shadow: 0 1px 0 0 #04447C;
+            }
+
+            .input-field input[type=text].valid {
+                border-bottom: 1px solid #04447C;
+                box-shadow: 0 1px 0 0 #04447C;
+            }
+
+            .input-field input[type=text]:focus + label {
+                color: #04447C;
+            }
+
+            .input-field input[type=text]:focus {
+                border-bottom: 1px solid #04447C;
+                box-shadow: 0 1px 0 0 #04447C;
+            }
+
+        .nav-wrapper {
+            background: #04447C;
+        }
+
+        nav .brand-logo.center {
+            font-size: 20px;
+        }
+
+        input {
+            margin: 0 !important;
+        }
+
+        .container {
+            padding: 10px 20px;
+        }
+
+        .container-campo {
+            margin-top: 10px;
+        }
+
+        nav .brand-logo.center {
+            font-size: 17px;
+        }
+    </style>
+    <nav style="height:44px;line-height:44px">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Dados Pessoais</a>
+            <ul id="nav-mobile" class="left">
+                <li>
+                    <a href="cadastro.html">
+                        <i class="fa fa-chevron-left"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="content" style="background:#cfcfcf">
+
+        <div class="container" style="background:white;margin-top:10px;border-radius:3px;">
+
+            <div class="container-campo" style="text-align:center">
+                <p style="color:#616161; font-size:16px; margin:16px 0px !important"><b>Verifique e preencha os campos abaixo:</b></p>
+            </div>
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="nome_completo" type="text" class="validate">
+                    <label for="nome_completo">Nome Completo</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="email" type="text" class="validate">
+                    <label for="email">Email</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input name="sexo" id="sexo_m" type="radio" class="validate" value="M">
+                    <label for="sexo_m">Masculino</label>
+
+                    <input name="sexo" id="sexo_f" type="radio" class="validate" value="F">
+                    <label for="sexo_f">Feminino</label>
+                </div>
+            </div>
+            <br />
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="cpf" type="text" class="validate">
+                    <label for="cpf">CPF</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="numero_documento" type="text" class="validate">
+                    <label for="numeroDocnumero_documentoumento">RG ou CNH</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="nome_pai" type="text" class="validate">
+                    <label for="nome_pai">Nome do Pai</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="nome_mae" type="text" class="validate">
+                    <label for="nome_mae">Nome da Mãe</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="nacionalidade" type="text" class="validate">
+                    <label for="nacionalidade">Nacionalidade</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <select id="estado">
+                        <option value="" disabled selected>UF</option>
+                        <option value="AC">AC</option>
+                        <option value="AL">AL</option>
+                        <option value="AM">AM</option>
+                        <option value="AP">AP</option>
+                        <option value="BA">BA</option>
+                        <option value="CE">CE</option>
+                        <option value="DF">DF</option>
+                        <option value="ES">ES</option>
+                        <option value="GO">GO</option>
+                        <option value="MA">MA</option>
+                        <option value="MG">MG</option>
+                        <option value="MS">MS</option>
+                        <option value="MT">MT</option>
+                        <option value="PA">PA</option>
+                        <option value="PB">PB</option>
+                        <option value="PE">PE</option>
+                        <option value="PI">PI</option>
+                        <option value="PR">PR</option>
+                        <option value="RJ">RJ</option>
+                        <option value="RN">RN</option>
+                        <option value="RO">RO</option>
+                        <option value="RR">RR</option>
+                        <option value="RS">RS</option>
+                        <option value="SC">SC</option>
+                        <option value="SE">SE</option>
+                        <option value="SP">SP</option>
+                        <option value="TO">TO</option>
+                    </select>
+                </div>
+            </div>
+            <!------------------------------------------->
+            <div class="container-campo">
+                <div class="input-field">
+                    <input type="text" id="autocomplete-input" class="autocomplete">
+                    <label for="autocomplete-input">Cidade</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="estado_civil" type="text" class="validate">
+                    <label for="estado_civil">Estado civil</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="nome_conjuge" type="text" class="validate">
+                    <label for="nome_conjuge">Nome conjuge</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="escolaridade" type="text" class="validate">
+                    <label for="escolaridade">Escolaridade</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="tel_resid" type="text" class="validate">
+                    <label for="tel_resid">Telefone residencial</label>
+                </div>
+            </div>
+
+            <div class="container-campo">
+                <div class="input-field">
+                    <input id="tel_celular" type="text" class="validate">
+                    <label for="tel_celular">Telefone celular</label>
+                </div>
+            </div>
+
+            <div class="container-campo container-btn">
+                <a id="btnCadastrar" class="waves-effect waves-light btn btn-nomyapp">Cadastrar</a>
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        $('select').material_select();
+
+        $(document).ready(function () {
+            var loading = $.loading();
+        //-----Masks
+            $("#cpf").mask("000.000.000-00");
+            $("#tel_resid").mask("(00) 0000-0000");
+            $("#tel_celular").mask("(00) 00000-0000");
+            $("#numero_documento").mask("00000000000");
+            //------localstorage
+            var user = window.localStorage.getItem("user");
+            user = JSON.parse(user);
+
+            //------if sexo
+
+            if (user.sexo == "M") {
+                $("#sexo_m").attr("checked", true);
+            } else if (user.sexo == "F") {
+                $("#sexo_f").attr("checked", true);
+            }
+
+            //------aparecer dados na tela
+            $("#nome_completo").val(user.fullname),
+                $("#email").val(user.email),
+                $("#cpf").val(user.cpf),
+                $("#numero_documento").val(user.numdoc),
+                $("#nome_mae").val(user.nomemae),
+                $("#nome_pai").val(user.nomepai),
+                $("#nacionalidade").val(user.nacionalidade),
+                $("#estado:selected").select(user.uf),
+                $('input.autocomplete').val(user.cidade),
+                $("#estado_civil").val(user.estadocivil),
+                $("#nome_conjuge").val(user.nomeconjuge),
+                $("#escolaridade").val(user.escolaridade),
+                $("#tel_resid").val(user.telresidencial),
+                $("#tel_celular").val(user.telcelular)
+
+            $.put = function (url, data, callback, type) {
+
+                if ($.isFunction(data)) {
+                    type = type || callback,
+                        callback = data,
+                        data = {}
+                }
+                return $.ajax({
+                    url: url,
+                    type: 'PUT',
+                    success: callback,
+                    data: data,
+                    contentType: type
+                });
+            } //PUT
+
+        }); //doc.ready
+        $('#btnVoltar').click(function () {
+            location.href = "cadastro.html";
+        });
+        $('#btnCadastrar').click(function () { // ao clicar no botao
+            var typedoc;
+            var user = window.localStorage.getItem("user");
+            user = JSON.parse(user);
+            if ($("#numero_documento").val().length == 9) {
+                typedoc = "RG";
+            } else if ($("#numero_documento").val().length == 11) {
+                typedoc = "CNH";
+            } else {
+                typedoc = "";
+            }
+
+            var obj = {
+                _id: user._id,
+                fullname: $("#nome_completo").val(),
+                email: $("#email").val(),
+                password: user.password,
+                cpf: $("#cpf").val(),
+                typedoc: typedoc,
+                numdoc: $("#numero_documento").val(),
+                nomemae: $("#nome_mae").val(),
+                nomepai: $("#nome_pai").val(),
+                nacionalidade: $("#nacionalidade").val(),
+                uf: $("#estado").val(),
+                cidade: $('input.autocomplete').val(),
+                estadocivil: $("#estado_civil").val(),
+                nomeconjuge: $("#nome_conjuge").val(),
+                escolaridade: $("#escolaridade").val(),
+                sexo: $("input[name=sexo]:checked").val(),
+                telresidencial: $("#tel_resid").val(),
+                telcelular: $("#tel_celular").val()
+            }
+
+            $.put("https://provider-ciab.mybluemix.net/updateuser", obj).done(function (data) {
+                if (data != null) {
+                    window.localStorage.setItem("user", JSON.stringify(data));
+                    navigator.notification.alert(
+                        'Dados atualizado.',  // message
+                        function () { location.href = "cadastro.html"; },         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    );
+                }
+            });
+
+
+        });//btn.click
+        $("#estado").change(function () {
+            $.post("https://provider-ciab.mybluemix.net/listAllCidades", { estado: $("#estado").val() }).done(function (result) {
+                var obj = {};
+                $.each(result[0].estados[0].cidades, function (i, city) {
+                    obj[city] = null;
+                });
+
+                $('input.autocomplete').autocomplete({
+                    data: obj,
+                    limit: 13, // The max amount of results that can be shown at once. Default: Infinity.
+                    onAutocomplete: function (val) {
+                        // Callback function when value is autcompleted.
+                    },
+                    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+                });
+            });
+        });//buscar cidade
+
+    </script>
+</body>
+</html>
